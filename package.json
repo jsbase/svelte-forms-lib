@@ -7,8 +7,10 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "format:prettier": "prettier . --write",
-    "format:stylelint": "prettier-stylelint . --write"
+    "format": "npm run format:stylelint && npm run format:prettier",
+    "format:prettier": "prettier --ignore='./{build,public,dist,node_modules,.history,.lh,.git,.vscode,.cache}/**' --write .",
+    "format:stylelint": "prettier-stylelint --ignore='./{build,public,dist,node_modules,.history,.lh,.git,.vscode,.cache}/**' --write .",
+    "browserslist": "browserslist --coverage=DE,global --mobile-to-desktop --ignore-unknown-versions && browserslist --update-db"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.30",
