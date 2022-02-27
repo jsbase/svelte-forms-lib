@@ -7,11 +7,14 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "fix-code": "prettier-eslint --write 'src/**/*.{js,html,svelte}'",
-    "fix-styles": "prettier-stylelint --write 'src/**/*.{css,scss}'"
+    "format:eslint": "prettier-eslint . --write --ext .js,.cjs,.mjs,.svelte --ignore-path .gitignore",
+    "format:prettier": "prettier . --write --ext .js,.cjs,.mjs,.svelte --ignore-path .gitignore",
+    "format:stylelint": "prettier-stylelint . --write --ext .js,.cjs,.mjs,.svelte --ignore-path .gitignore",
+    "lint": "eslint --ext .js,.cjs,.mjs,.svelte --ignore-path .gitignore --fix"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.30",
+    "browserslist": "^4.19.3",
     "eslint": "^7.32.0",
     "prettier": "^2.5.1",
     "prettier-eslint": "^13.0.0",
