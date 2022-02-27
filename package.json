@@ -6,10 +6,18 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "fix-code": "prettier-eslint --write 'src/**/*.{js,html,svelte}'",
+    "fix-styles": "prettier-stylelint --write 'src/**/*.{css,scss}'"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^1.0.0-next.30",
+    "eslint": "^7.32.0",
+    "prettier": "^2.5.1",
+    "prettier-eslint": "^13.0.0",
+    "prettier-eslint-cli": "^5.0.1",
+    "prettier-stylelint": "^0.4.2",
+    "stylelint": "^14.5.3",
     "svelte": "^3.44.0",
     "vite": "^2.8.0",
     "yup": "^0.32.11"

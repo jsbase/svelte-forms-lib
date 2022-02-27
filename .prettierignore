@@ -1,0 +1,12 @@
+strings.jsonscripts/*
+node_modules/*
+public/*
+build/*
+dist/*
+.git/*
+.github/*
+.vscode/*
+.history/*
+.lh/*
+.cache/*
+.tmp/*

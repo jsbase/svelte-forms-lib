@@ -55,6 +55,13 @@
 {/if}
 
 <style>
+  /*
+To avoid css naming collisions, css classes are automatically hashed.
+Unfortunately that means if we want to customize the helper component e.g. the <Field/> component;
+we will need to use the :global(.class-name) and pass .class-name down as a class prop
+
+See https://github.com/sveltejs/svelte/issues/2870 for about this issue
+*/
   input {
     font-family: inherit;
     font-size: inherit;
