@@ -1,8 +1,25 @@
 {
-	"folders": [
-		{
-			"path": "."
-		}
-	],
-	"settings": {}
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "files.exclude": {
+      "**/.git": true,
+      "**/.svn": true,
+      "**/.hg": true,
+      "**/CVS": true,
+      "**/.DS_Store": true,
+      "**/Thumbs.db": true,
+      "**/.lh": true,
+      "**/*cache": true,
+      "**/*DS_Store": true,
+      "**/.history": true,
+      "**/.tmp": true,
+      "**/.cache": true,
+      "**/node_modules": true
+    },
+    "explorerExclude.backup": {}
+  }
 }

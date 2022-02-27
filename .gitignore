@@ -73,14 +73,16 @@ typings/
 .env.test
 
 # parcel-bundler cache (https://parceljs.org/)
-.cache
+.cache/*
+.tmp/*
 
 # Next.js build output
 .next
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+dist/*
+build/*
 
 # Gatsby files
 .cache/
@@ -102,3 +104,7 @@ dist
 
 # TernJS port file
 .tern-port
+
+# vscode plugins
+.history/*
+.lh/*

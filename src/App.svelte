@@ -25,7 +25,7 @@
   :root {
     --primary-light: #a6f9d6;
     --primary: #5be2a9;
-    --primary-dark: #53ce9a;
+    --primary-dark: #308662;
     --secondary: #1e2145;
     --white: #fff;
     --grey: #e6e6ff;
