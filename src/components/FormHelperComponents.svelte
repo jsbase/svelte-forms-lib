@@ -5,7 +5,7 @@
   import { Form, Field, ErrorMessage } from "svelte-forms-lib";
   import * as yup from "yup";
 
-  $: payload = {};
+  $: payload = [];
 
   const formProps = {
     initialValues: {
@@ -17,7 +17,7 @@
       "email-helper": yup.string().email().required(),
     }),
     onSubmit: (values) => {
-      payload = JSON.stringify(values);
+      payload.push(values);
     },
   };
 </script>
@@ -58,7 +58,7 @@
 </Form>
 
 {#if Object.entries(payload).length}
-  <pre>{payload}</pre>
+  <pre>{JSON.stringify(payload)}</pre>
 {/if}
 
 <style>
