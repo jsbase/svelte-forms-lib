@@ -57,7 +57,7 @@
           bind:value={$form.users[j].name}
         />
         {#if $errors.users[j].name}
-          <small class="error">{$errors.users[j].name}</small>
+          <small class="form-error">{$errors.users[j].name}</small>
         {/if}
       </div>
 
@@ -71,7 +71,7 @@
           bind:value={$form.users[j].email}
         />
         {#if $errors.users[j].email}
-          <small class="error">{$errors.users[j].email}</small>
+          <small class="form-error">{$errors.users[j].email}</small>
         {/if}
       </div>
 
@@ -96,11 +96,6 @@
 {/if}
 
 <style>
-  .error {
-    display: block;
-    color: red;
-  }
-
   .form-group {
     display: flex;
     align-items: baseline;

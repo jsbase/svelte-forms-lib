@@ -33,14 +33,12 @@
     --red: #ff6b6b;
     font-family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif";
   }
-
   header {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
   }
-
   main {
     display: flex;
     align-items: center;
@@ -49,16 +47,43 @@
     padding: 1em;
     text-align: center;
   }
-
   .container {
     max-width: 440px;
   }
-
   img {
     display: inline-block;
     height: 8rem;
     width: 8rem;
     margin-top: 20px;
+  }
+  :global(.button-group) {
+    display: flex;
+  }
+  :global(button) {
+    color: var(--white);
+    background-color: var(--primary);
+    border: none;
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+    outline: none;
+    border-radius: 4px;
+    display: block;
+    margin: 12px auto;
+    line-height: 1.8;
+    font-size: 12px;
+    padding: 10px 18px;
+    width: 100%;
+    transition: all 150ms ease;
+    cursor: pointer;
+  }
+  :global(button:disabled) {
+    background-color: var(--grey);
+  }
+  :global(button:focus:not(:disabled)) {
+    box-shadow: 0 0 0 4px var(--primary-light);
+  }
+  :global(button:hover:not(:disabled)) {
+    background-color: var(--primary-dark);
   }
 
   @media (min-width: 580px) {
