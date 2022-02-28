@@ -5,7 +5,7 @@
   import { Form, Field, ErrorMessage } from "svelte-forms-lib";
   import * as yup from "yup";
 
-  $: payload = JSON.parse(localStorage.getItem("form-helper"));
+  $: payload = JSON.parse(localStorage.getItem("form-helper")) || [];
 
   const formProps = {
     initialValues: {
