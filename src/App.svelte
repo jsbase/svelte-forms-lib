@@ -13,11 +13,13 @@
 
 <main>
   <div class="container">
-    <FormBasic />
     <FormHelperComponents />
+    <!--
+    <FormBasic />
     <FormCustomValidation />
     <FormYupValidation />
     <FormArray />
+    -->
   </div>
 </main>
 

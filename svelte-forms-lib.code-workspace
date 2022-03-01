@@ -10,7 +10,7 @@
     "prettier.stylelintIntegration": true,
     "editor.formatOnSave": true,
     "editor.codeActionsOnSave": {
-        "eslint.autoFixOnSave": false
+      "eslint.autoFixOnSave": false
     },
     "files.exclude": {
       "**/.git": true,
@@ -28,6 +28,6 @@
       "**/node_modules": true
     },
     "explorerExclude.backup": {},
-    "workspace.isHidden": false
+    "workspace.isHidden": true
   }
 }

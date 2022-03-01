@@ -1,104 +1,120 @@
 <script>
+  // @ts-nocheck
+
   /**
    * see: https://svelte-forms-lib-sapper-docs.vercel.app/helpers
    */
+  import { onMount, onDestroy } from "svelte";
+  import Store from "../store.js";
   import { Form, Field, ErrorMessage } from "svelte-forms-lib";
   import * as yup from "yup";
-  import Store from "../store.js";
 
-  const KEY_FORM_DATA = 'form-data';
+  let payload = [];
+  let unsubscribe;
 
-  $: payload = JSON.stringify(Store.get(KEY_FORM_DATA));
+  //const KEY_FORM_DATA = "form-data";
 
-  const formProps = {
-    initialValues: {
-      "name-helper": "",
-      "email-helper": "",
-      "gender-helper": "",
-    },
-    validationSchema: yup.object().shape({
-      "name-helper": yup.string().required(),
-      "email-helper": yup.string().email().required(),
-      "gender-helper": yup.string().required(),
-    }),
-    onSubmit: (values) => {
-      console.log("(onSubmit) before: ", payload);
-      console.log("(onSubmit) values: ", values);
+  let formProps;
 
-      const newData = [];
-      newData.concat(Array.isArray(payload) && payload.length ? payload : []);
-      newData.push(values);
+  const validationSchema = yup.object().shape({
+    "name-helper": yup.string().required(),
+    "email-helper": yup.string().email().required(),
+    "gender-helper": yup.string().required(),
+  });
 
-      //console.log("(onSubmit) newData: ", JSON.stringify(newData));
+  const onSubmit = (value) => {
+    Store.update((values) => {
+      let newPayload = [...payload];
 
-      Store.update(newData => [
-      	newData,
-      	...Store.get(KEY_FORM_DATA),
-      ]);
+      newPayload.concat(values);
+      newPayload.push(value);
 
-      payload = Store.get(KEY_FORM_DATA);
+      payload = newPayload;
 
-      console.log("(onSubmit) after: ", payload);
-    },
+      return payload;
+    });
   };
+
+  unsubscribe = Store.subscribe((values) => {
+    payload = values || payload;
+
+    formProps = {
+      initialValues: {
+        "name-helper": "",
+        "email-helper": "",
+        "gender-helper": "",
+      },
+      validationSchema,
+      onSubmit,
+    };
+  });
+
+  // onMount(() => {
+  //   unsubscribe = Store.subscribe((value) => {
+  //     console.log("SUBSCRIBE  value: ", value);
+  //   });
+  // });
+
+  onDestroy(unsubscribe);
 </script>
 
 <h1>helper components</h1>
 
-<Form {...formProps}>
-  <div class="form-group">
-    <!-- svelte-ignore a11y-label-has-associated-control -->
-    <label class="form-label" for="nameHelper">Name</label>
-    <Field class="form-field" name="name-helper" id="nameHelper" />
-    <ErrorMessage class="form-error" name="name-helper" />
+{#if formProps}
+  <Form {...formProps}>
+    <div class="form-group">
+      <!-- svelte-ignore a11y-label-has-associated-control -->
+      <label class="form-label" for="nameHelper">Name</label>
+      <Field class="form-field" name="name-helper" id="nameHelper" />
+      <ErrorMessage class="form-error" name="name-helper" />
 
-    <!-- svelte-ignore a11y-label-has-associated-control -->
-    <label class="form-label" for="emailHelper">E-Mail</label>
-    <Field class="form-field" name="email-helper" id="emailHelper" />
-    <ErrorMessage class="form-error" name="email-helper" />
-  </div>
+      <!-- svelte-ignore a11y-label-has-associated-control -->
+      <label class="form-label" for="emailHelper">E-Mail</label>
+      <Field class="form-field" name="email-helper" id="emailHelper" />
+      <ErrorMessage class="form-error" name="email-helper" />
+    </div>
 
-  <div class="form-group">
-    <Field
-      type="radio"
-      name="gender-helper"
-      value="Mr"
-      class="form-checkbox"
-      id="gender-helper-mr"
-      checked
-    />
-    <label for="gender-helper-mr" class="form-label">
-      <div class="form-label__circle" />
-      <span class="form-label__text">Mr</span>
-    </label>
+    <div class="form-group">
+      <Field
+        type="radio"
+        name="gender-helper"
+        value="Mr"
+        class="form-checkbox"
+        id="gender-helper-mr"
+        checked
+      />
+      <label for="gender-helper-mr" class="form-label">
+        <div class="form-label__circle" />
+        <span class="form-label__text">Mr</span>
+      </label>
 
-    <Field
-      type="radio"
-      name="gender-helper"
-      value="mrs"
-      class="form-checkbox"
-      id="gender-helper-mrs"
-    />
-    <label for="gender-helper-mrs" class="form-label">
-      <div class="form-label__circle" />
-      <span class="form-label__text">Mrs</span>
-    </label>
+      <Field
+        type="radio"
+        name="gender-helper"
+        value="mrs"
+        class="form-checkbox"
+        id="gender-helper-mrs"
+      />
+      <label for="gender-helper-mrs" class="form-label">
+        <div class="form-label__circle" />
+        <span class="form-label__text">Mrs</span>
+      </label>
 
-    <Field
-      type="radio"
-      name="gender-helper"
-      value="mx"
-      class="form-checkbox"
-      id="gender-helper-mx"
-    />
-    <label for="gender-helper-mx" class="form-label">
-      <div class="form-label__circle" />
-      <span class="form-label__text">Mx</span>
-    </label>
-  </div>
+      <Field
+        type="radio"
+        name="gender-helper"
+        value="mx"
+        class="form-checkbox"
+        id="gender-helper-mx"
+      />
+      <label for="gender-helper-mx" class="form-label">
+        <div class="form-label__circle" />
+        <span class="form-label__text">Mx</span>
+      </label>
+    </div>
 
-  <!-- more input field types -->
-  <!--
+    <!-- more input field types -->
+    <!--
   <label>input[type=text]</label>
   <Field name="text" type="text" />
 
@@ -116,11 +132,12 @@
   <Field name="date" type="date" />
   -->
 
-  <button type="submit">Submit</button>
-</Form>
+    <button type="submit">Submit</button>
+  </Form>
+{/if}
 
-<h4>Data:</h4>
-<pre>{payload}</pre>
+<h4>Payload:</h4>
+<pre>{JSON.stringify(payload)}</pre>
 
 <style>
   .form-group {
