@@ -32,7 +32,7 @@
       //console.log("(onSubmit) newData: ", JSON.stringify(newData));
 
       Store.update(newData => [
-      	newData
+      	newData,
       	...Store.get(KEY_FORM_DATA),
       ]);
 
