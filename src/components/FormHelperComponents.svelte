@@ -131,11 +131,11 @@
   .form-group {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    flex-flow: column nowrap;
+    width: 100%;
   }
   .form-label {
-    display: inline-flex;
-    align-items: center;
+    display: block;
     color: var(--grey-dark);
     font-weight: bold;
     margin-top: 20px;
@@ -145,6 +145,7 @@
     letter-spacing: 1.9px;
     line-height: 2;
     cursor: pointer;
+    width: 100%;
   }
   :global(input[type="radio"]),
   :global(input[type="checkbox"]) {
