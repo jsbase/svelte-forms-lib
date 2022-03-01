@@ -23,8 +23,7 @@
     "stylelint": "^14.5.3",
     "svelte": "^3.44.0",
     "vite": "^2.8.0",
-    "yup": "^0.32.11",
-    "trim-newlines": "^3.0.1"
+    "yup": "^0.32.11"
   },
   "dependencies": {
     "svelte-forms-lib": "^2.0.1"
