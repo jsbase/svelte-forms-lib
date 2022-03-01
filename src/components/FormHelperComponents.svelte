@@ -4,8 +4,11 @@
    */
   import { Form, Field, ErrorMessage } from "svelte-forms-lib";
   import * as yup from "yup";
+  import Store from "../store.js";
 
-  $: payload = JSON.parse(localStorage.getItem("form-helper")) || [];
+  const KEY_FORM_DATA = 'form-data';
+
+  $: payload = JSON.stringify(Store.get(KEY_FORM_DATA));
 
   const formProps = {
     initialValues: {
@@ -20,7 +23,7 @@
     }),
     onSubmit: (values) => {
       console.log("(onSubmit) before: ", payload);
-      //console.log("(onSubmit) values: ", values);
+      console.log("(onSubmit) values: ", values);
 
       const newData = [];
       newData.concat(Array.isArray(payload) && payload.length ? payload : []);
@@ -28,9 +31,12 @@
 
       //console.log("(onSubmit) newData: ", JSON.stringify(newData));
 
-      localStorage.setItem("form-helper", JSON.stringify(newData));
+      Store.update(newData => [
+      	newData
+      	...Store.get(KEY_FORM_DATA),
+      ]);
 
-      payload = JSON.stringify(newData);
+      payload = Store.get(KEY_FORM_DATA);
 
       console.log("(onSubmit) after: ", payload);
     },
