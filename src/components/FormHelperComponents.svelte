@@ -11,9 +11,6 @@
 
   let payload = [];
   let unsubscribe;
-
-  //const KEY_FORM_DATA = "form-data";
-
   let formProps;
 
   const validationSchema = yup.object().shape({
@@ -22,18 +19,9 @@
     "gender-helper": yup.string().required(),
   });
 
-  const onSubmit = (value) => {
-    Store.update((values) => {
-      let newPayload = [...payload];
-
-      newPayload.concat(values);
-      newPayload.push(value);
-
-      payload = newPayload;
-
-      return payload;
-    });
-  };
+  function onSubmit(value) {
+      Store.update((values) => [...values, value]);
+  }
 
   unsubscribe = Store.subscribe((values) => {
     payload = values || payload;
