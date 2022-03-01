@@ -1,10 +1,20 @@
-import { writeable } from 'svelte/store';
+import { writable } from 'svelte/store';
 
-const localData = localStorage in window ? localStorage.setItem('form-data', []) : [];
-const Store = writeable(localData);
+const KEY_FORM_DATA = 'form-data';
+const localData = localStorage in window
+    ? localStorage.getItem(KEY_FORM_DATA)
+    : localStorage.setItem(KEY_FORM_DATA, []);
+const Store = writable(localData);
 
-Store.subscribe((evt) => {
-	console.log('onStore.subscribe: ', evt);	
+Store.subscribe(data => {
+	//console.log('onStore.subscribe: ', evt);
+	localStorage.setItem(
+	    KEY_FORM_DATA,
+	    [
+	        ...localStorage.getItem(KEY_FORM_DATA),
+	        data
+	    ]
+	);
 });
 
 export default Store;
