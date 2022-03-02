@@ -14,12 +14,10 @@
 <main>
   <div class="container">
     <FormHelperComponents />
-    <!--
     <FormBasic />
     <FormCustomValidation />
     <FormYupValidation />
     <FormArray />
-    -->
   </div>
 </main>
 
@@ -58,9 +56,6 @@
     width: 8rem;
     margin-top: 20px;
   }
-  :global(.button-group) {
-    display: flex;
-  }
   :global(button) {
     color: var(--white);
     background-color: var(--primary);
@@ -87,7 +82,87 @@
   :global(button:hover:not(:disabled)) {
     background-color: var(--primary-dark);
   }
-
+  :global(.form-field) {
+    background-color: var(--white);
+    box-sizing: border-box;
+    font-family: monospace;
+    padding: 18px;
+    width: 100%;
+    padding: 12px;
+    color: var(--grey-dark);
+    border: 1px solid var(--grey);
+    border-radius: 4px;
+    transition: all 150ms ease;
+  }
+  :global(select.form-field) {
+    padding-right: 30px;
+  }
+  :global(.form-field:focus) {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 5px var(--primary);
+    outline: none;
+  }
+  :global(.form-field:disabled) {
+    background-color: var(--grey);
+    color: var(--grey-dark);
+  }
+  :global(.form-group) {
+    display: flex;
+    align-items: flex-start;
+    flex-flow: column nowrap;
+    width: 100%;
+  }
+  :global(.form-label) {
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    color: var(--grey-dark);
+    cursor: pointer;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1.9px;
+    line-height: 2;
+  }
+  :global(.form-group--inline) {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+  :global(input[type="radio"]),
+  :global(input[type="checkbox"]) {
+    opacity: 1;
+    color: transparent;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    appearance: none;
+    outline: 0 none;
+    border: 0 none;
+    position: absolute;
+    top: -9999px;
+    left: 0;
+  }
+  :global(.form-field:focus) {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 5px var(--primary-light);
+    outline: none;
+  }
+  :global(.form-field:disabled) {
+    background-color: var(--grey);
+    color: var(--grey-dark);
+  }
+  :global(.form-error) {
+    display: block;
+    margin-top: 10px;
+    font-family: monospace;
+    font-size: 12px;
+    color: var(--red);
+  }
   @media (min-width: 580px) {
     img {
       height: 4rem;

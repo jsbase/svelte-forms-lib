@@ -96,95 +96,11 @@
 {/if}
 
 <style>
-  .form-group {
-    display: flex;
-    align-items: baseline;
-  }
-
   .button-group {
     display: flex;
   }
 
   button ~ button {
     margin-left: 15px;
-  }
-
-  button {
-    color: var(--white);
-    background-color: var(--primary);
-    border: none;
-    text-transform: uppercase;
-    letter-spacing: 1.8px;
-    outline: none;
-    border-radius: 4px;
-    display: block;
-    margin: 12px auto;
-    line-height: 1.8;
-    font-size: 12px;
-    padding: 10px 18px;
-    width: 100%;
-    transition: all 150ms ease;
-    cursor: pointer;
-  }
-
-  button:disabled {
-    background-color: var(--grey);
-  }
-
-  button:focus:not(:disabled) {
-    box-shadow: 0 0 0 4px var(--primary-light);
-  }
-
-  button:hover:not(:disabled) {
-    background-color: var(--primary-dark);
-  }
-
-  :global(.form-label) {
-    display: block;
-    color: var(--grey-dark);
-    font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 4px;
-    text-transform: uppercase;
-    font-size: 12px;
-    letter-spacing: 1.9px;
-    line-height: 2;
-  }
-
-  :global(.form-field) {
-    font-family: monospace;
-    padding: 18px;
-    width: 100%;
-    padding: 12px;
-    box-sizing: border-box;
-    color: var(--grey-dark);
-    border: 1px solid var(--grey);
-    border-radius: 4px;
-    transition: all 150ms ease;
-  }
-
-  :global(.form-field:focus) {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 5px var(--primary);
-    outline: none;
-  }
-
-  :global(.form-field:focus) {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 5px var(--primary);
-    outline: none;
-  }
-
-  :global(.form-field:disabled) {
-    background-color: var(--grey);
-    color: var(--grey-dark);
-  }
-
-  :global(.form-error) {
-    display: block;
-    margin-top: 10px;
-    font-family: monospace;
-    font-size: 12px;
-    color: var(--red);
   }
 </style>

@@ -9,7 +9,7 @@
   import { Form, Field, ErrorMessage } from "svelte-forms-lib";
   import * as yup from "yup";
 
-  let payload = [];
+  $: payload = [];
   let unsubscribe;
   let formProps;
 
@@ -19,29 +19,36 @@
     "gender-helper": yup.string().required(),
   });
 
-  function onSubmit(value) {
-      Store.update((values) => [...values, value]);
-  }
+  const onSubmit = (value) => {
+    Store.update(() => {
+      // console.log("UPDATE   value: ", value);
 
-  unsubscribe = Store.subscribe((values) => {
-    payload = values || payload;
+      let newPayload = [value, ...payload];
+      //newPayload.concat(oldPayload);
+      //newPayload.push(value);
+      //payload = newPayload;
+      return value;
+    });
+  };
 
-    formProps = {
-      initialValues: {
-        "name-helper": "",
-        "email-helper": "",
-        "gender-helper": "",
-      },
-      validationSchema,
-      onSubmit,
-    };
+  onMount(() => {
+    unsubscribe = Store.subscribe((updatedPayload) => {
+      // console.log("SUBSCRIBE   payload: ", payload);
+      // console.log("SUBSCRIBE   oldPayload: ", updatedPayload);
+
+      payload = updatedPayload;
+
+      formProps = {
+        initialValues: {
+          "name-helper": "",
+          "email-helper": "",
+          "gender-helper": "",
+        },
+        validationSchema,
+        onSubmit,
+      };
+    });
   });
-
-  // onMount(() => {
-  //   unsubscribe = Store.subscribe((value) => {
-  //     console.log("SUBSCRIBE  value: ", value);
-  //   });
-  // });
 
   onDestroy(unsubscribe);
 </script>
@@ -52,7 +59,7 @@
   <Form {...formProps}>
     <div class="form-group">
       <!-- svelte-ignore a11y-label-has-associated-control -->
-      <label class="form-label" for="nameHelper">Name</label>
+      <label class="form-label " for="nameHelper">Name</label>
       <Field class="form-field" name="name-helper" id="nameHelper" />
       <ErrorMessage class="form-error" name="name-helper" />
 
@@ -62,7 +69,7 @@
       <ErrorMessage class="form-error" name="email-helper" />
     </div>
 
-    <div class="form-group">
+    <div class="form-group--inline">
       <Field
         type="radio"
         name="gender-helper"
@@ -103,82 +110,36 @@
 
     <!-- more input field types -->
     <!--
-  <label>input[type=text]</label>
-  <Field name="text" type="text" />
+    <Field name="text" type="text" />
+    <label>input[type=text]</label>
 
-  <label>input[type=password]</label>
-  <Field name="password" type="password" />
+    <Field name="password" type="password" />
+    <label>input[type=password]</label>
 
+    <Field name="number" type="number" />
+    <label>input[type=number]</label>
 
-  <label>input[type=email]</label>
-  <Field name="email" type="email" />
-
-  <label>input[type=number]</label>
-  <Field name="number" type="number" />
-
-  <label>input[type=date]</label>
-  <Field name="date" type="date" />
-  -->
+    <Field name="date" type="date" />
+    <label>input[type=date]</label>
+    -->
 
     <button type="submit">Submit</button>
   </Form>
 {/if}
 
 <h4>Payload:</h4>
-<pre>{JSON.stringify(payload)}</pre>
+<code>{JSON.stringify(payload)}</code>
 
 <style>
-  .form-group {
-    display: flex;
-    align-items: center;
-    flex-flow: column nowrap;
-    width: 100%;
-  }
-  .form-label {
-    display: block;
-    color: var(--grey-dark);
-    font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 4px;
-    text-transform: uppercase;
-    font-size: 12px;
-    letter-spacing: 1.9px;
-    line-height: 2;
-    cursor: pointer;
-    width: 100%;
-  }
-  :global(input[type="radio"]),
-  :global(input[type="checkbox"]) {
-    opacity: 1;
-    color: transparent;
-    visibility: hidden;
-    width: 0;
-    height: 0;
-    overflow: hidden;
-    appearance: none;
-    outline: 0 none;
-    border: 0 none;
-    position: absolute;
-    top: -9999px;
-    left: 0;
-  }
-  :global(input[type="checkbox"]:checked
-      + .form-label
-      .form-label__circle:before),
-  :global(input[type="radio"]:checked
-      + .form-label
-      .form-label__circle:before) {
+  input[type="checkbox"]:checked + .form-label .form-label__circle:before,
+  input[type="radio"]:checked + .form-label .form-label__circle:before {
     background: var(--primary);
   }
-  .form-label:hover {
+  .form-label__circle:hover {
     border-color: var(--primary);
     color: var(--primary);
   }
-  .form-label:hover .form-label__circle {
-    border-color: var(--primary);
-    color: var(--primary);
-  }
-  :global(.form-label__circle) {
+  .form-label__circle {
     content: "";
     display: inline-block;
     background-color: --white;
@@ -188,7 +149,7 @@
     width: 18px;
     transition: border-color 0.4s cubic-bezier(0.45, 1.8, 0.5, 0.75);
   }
-  :global(.form-label__circle:before) {
+  .form-label__circle:before {
     content: "";
     background-color: transparent;
     border-radius: 50%;
@@ -201,37 +162,13 @@
     transform: translate(-50%, -50%);
     transition: background-color 0.4s cubic-bezier(0.45, 1.8, 0.5, 0.75);
   }
-  :global(.form-label__text) {
-    display: inline-block;
+  .form-label__text {
     font-size: 22px;
     font-weight: bold;
     padding-left: 10px;
   }
-  :global(.form-field) {
-    font-family: monospace;
-    padding: 18px;
-    width: 100%;
-    padding: 12px;
-    box-sizing: border-box;
-    color: var(--grey-dark);
-    border: 1px solid var(--grey);
-    border-radius: 4px;
-    transition: all 150ms ease;
-  }
-  :global(.form-field:focus) {
-    border-color: var(--primary-dark);
-    box-shadow: 0 0 0 5px var(--primary-dark);
-    outline: none;
-  }
-  :global(.form-field:disabled) {
-    background-color: var(--grey);
-    color: var(--grey-dark);
-  }
-  :global(.form-error) {
+  code {
+    text-align: left;
     display: block;
-    margin-top: 10px;
-    font-family: monospace;
-    font-size: 12px;
-    color: var(--red);
   }
 </style>

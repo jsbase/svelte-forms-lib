@@ -30,23 +30,27 @@
 <h1>custom validation</h1>
 
 <form on:submit={handleSubmit}>
-  <label for="name">name</label>
-  <input
-    id="name"
-    name="name"
-    on:change={handleChange}
-    bind:value={$form.name}
-  />
-  {#if $errors.name}<small class="form-error">{$errors.name}</small>{/if}
+  <div class="form-group">
+    <label class="form-label" for="name">name</label>
+    <input
+      id="name"
+      name="name"
+      class="form-field"
+      on:change={handleChange}
+      bind:value={$form.name}
+    />
+    {#if $errors.name}<small class="form-error">{$errors.name}</small>{/if}
 
-  <label for="email">email</label>
-  <input
-    id="email"
-    name="email"
-    on:change={handleChange}
-    bind:value={$form.email}
-  />
-  {#if $errors.email}<small class="form-error">{$errors.email}</small>{/if}
+    <label class="form-label" for="email">email</label>
+    <input
+      id="email"
+      name="email"
+      class="form-field"
+      on:change={handleChange}
+      bind:value={$form.email}
+    />
+    {#if $errors.email}<small class="form-error">{$errors.email}</small>{/if}
+  </div>
   <button type="submit">submit</button>
 </form>
 
@@ -54,88 +58,4 @@
   <pre>{payload}</pre>
 {/if}
 
-<style>
-  input {
-    font-family: inherit;
-    font-size: inherit;
-    width: 100%;
-    padding: 12px;
-    box-sizing: border-box;
-    border: 1px solid var(--grey);
-    border-radius: 4px;
-    transition: all 150ms ease;
-    background: var(--white);
-  }
-
-  input:focus {
-    outline: none;
-    box-shadow: 0 0 0 4px var(--grey);
-    border-color: var(--grey);
-  }
-
-  input:disabled {
-    color: var(--grey);
-  }
-
-  button {
-    color: var(--white);
-    background-color: var(--primary);
-    border: none;
-    text-transform: uppercase;
-    letter-spacing: 1.8px;
-    outline: none;
-    border-radius: 4px;
-    display: block;
-    margin: 12px auto;
-    line-height: 1.8;
-    font-size: 12px;
-    padding: 10px 18px;
-    min-width: 120px;
-    transition: all 150ms ease;
-    cursor: pointer;
-  }
-
-  button:disabled {
-    background-color: var(--grey);
-  }
-
-  button:focus:not(:disabled) {
-    box-shadow: 0 0 0 4px var(--primary-light);
-  }
-
-  button:hover:not(:disabled) {
-    background-color: var(--primary-dark);
-  }
-
-  label {
-    display: block;
-    color: var(--grey-dark);
-    font-weight: bold;
-    margin-top: 20px;
-    margin-bottom: 4px;
-    text-transform: uppercase;
-    font-size: 12px;
-    letter-spacing: 1.9px;
-    line-height: 2;
-  }
-
-  :global(.form-field) {
-    font-family: monospace;
-    padding: 18px;
-    border: none;
-    border-radius: 0;
-  }
-
-  :global(.form-field:focus) {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 5px var(--primary);
-  }
-
-  :global(.form-error) {
-    display: block;
-    margin-top: 10px;
-    font-family: monospace;
-    font-size: 12px;
-    color: var(--red);
-  }
-</style>
+<style></style>
