@@ -24,7 +24,7 @@ vite --host
 vite build && vite preview --host
 ```
 
-#### Optional: Install caddy (e.g. sudo pacman -Syu caddy or from the [official Homepage](https://caddyserver.com/download)) to open a reverse proxy server (http://workspace/) with  preconfigured [Caddyfile](https://raw.githubusercontent.com/jsbase/svelte-forms-lib/main/Caddyfile)
+#### Optional: Install caddy (e.g. "sudo pacman -Syu caddy" or from the [official Homepage](https://caddyserver.com/download)) to open a reverse proxy server (http://workspace/) with  preconfigured [Caddyfile](https://raw.githubusercontent.com/jsbase/svelte-forms-lib/main/Caddyfile)
 ```
 sudo caddy run -config Caddyfile
 ```
