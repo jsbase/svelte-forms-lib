@@ -5,41 +5,40 @@
    * see: https://svelte-forms-lib-sapper-docs.vercel.app/helpers
    */
   import { onMount, onDestroy } from "svelte";
-  import Store from "../store.js";
   import { Form, Field, ErrorMessage } from "svelte-forms-lib";
+  import { Users } from "../users.js";
   import * as yup from "yup";
 
-  $: payload = [];
+  $: payload = Users;
   let unsubscribe;
   let formProps;
 
   const validationSchema = yup.object().shape({
-    "name-helper": yup.string().required(),
-    "email-helper": yup.string().email().required(),
-    "gender-helper": yup.string().required(),
+    username: yup.string().required(),
+    useremail: yup.string().email().required(),
+    usergender: yup.string().required(),
   });
 
-  const onSubmit = (value) => {
-    Store.update((values) => {
-      // console.log("UPDATE   value: ", value);
-      values.unshift(value);
-      //payload = values;
-      return values;
+  const onSubmit = (user) => {
+    Users.update((data) => {
+      const users = JSON.parse(data);
+      users.unshift(user);
+
+      data = users;
+
+      return data;
     });
   };
 
   onMount(() => {
-    unsubscribe = Store.subscribe((values) => {
-      // console.log("SUBSCRIBE   values: ", values);
-      // console.log("SUBSCRIBE   payload: ", payload);
-
-      payload = values;
+    unsubscribe = Users.subscribe((users) => {
+      payload = users;
 
       formProps = {
         initialValues: {
-          "name-helper": "",
-          "email-helper": "",
-          "gender-helper": "",
+          username: "",
+          useremail: "",
+          usergender: "",
         },
         validationSchema,
         onSubmit,
@@ -56,50 +55,50 @@
   <Form {...formProps}>
     <div class="form-group">
       <!-- svelte-ignore a11y-label-has-associated-control -->
-      <label class="form-label " for="nameHelper">Name</label>
-      <Field class="form-field" name="name-helper" id="nameHelper" />
-      <ErrorMessage class="form-error" name="name-helper" />
+      <label class="form-label " for="username">Name</label>
+      <Field class="form-field" name="username" id="username" />
+      <ErrorMessage class="form-error" name="username" />
 
       <!-- svelte-ignore a11y-label-has-associated-control -->
-      <label class="form-label" for="emailHelper">E-Mail</label>
-      <Field class="form-field" name="email-helper" id="emailHelper" />
-      <ErrorMessage class="form-error" name="email-helper" />
+      <label class="form-label" for="useremail">E-Mail</label>
+      <Field class="form-field" name="useremail" id="useremail" />
+      <ErrorMessage class="form-error" name="useremail" />
     </div>
 
     <div class="form-group--inline">
       <Field
         type="radio"
-        name="gender-helper"
+        name="usergender"
         value="Mr"
         class="form-checkbox"
-        id="gender-helper-mr"
+        id="usergender-mr"
         checked
       />
-      <label for="gender-helper-mr" class="form-label">
+      <label for="usergender-mr" class="form-label">
         <div class="form-label__circle" />
         <span class="form-label__text">Mr</span>
       </label>
 
       <Field
         type="radio"
-        name="gender-helper"
+        name="usergender"
         value="mrs"
         class="form-checkbox"
-        id="gender-helper-mrs"
+        id="usergender-mrs"
       />
-      <label for="gender-helper-mrs" class="form-label">
+      <label for="usergender-mrs" class="form-label">
         <div class="form-label__circle" />
         <span class="form-label__text">Mrs</span>
       </label>
 
       <Field
         type="radio"
-        name="gender-helper"
+        name="usergender"
         value="mx"
         class="form-checkbox"
-        id="gender-helper-mx"
+        id="usergender-mx"
       />
-      <label for="gender-helper-mx" class="form-label">
+      <label for="usergender-mx" class="form-label">
         <div class="form-label__circle" />
         <span class="form-label__text">Mx</span>
       </label>
@@ -124,9 +123,25 @@
   </Form>
 {/if}
 
-<h4>Payload:</h4>
-<code>{JSON.stringify(payload)}</code>
+<code>
+  {JSON.stringify(payload)}
+</code>
 
+<!--
+<ul>
+  {#each JSON.parse(payload) as userData}
+    <li>
+      {JSON.stringify(userData)}
+      <dl>
+        {#each Array.from(JSON.parse(userData)) as uData, key}
+          <dt>{key}</dt>
+          <dd>{uData}</dd>
+        {/each}
+      </dl>
+    </li>
+  {/each}
+</ul>
+-->
 <style>
   input[type="checkbox"]:checked + .form-label .form-label__circle:before,
   input[type="radio"]:checked + .form-label .form-label__circle:before {

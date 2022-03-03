@@ -14,10 +14,10 @@
 <main>
   <div class="container">
     <FormHelperComponents />
-    <FormBasic />
+    <!-- <FormBasic />
     <FormCustomValidation />
     <FormYupValidation />
-    <FormArray />
+    <FormArray /> -->
   </div>
 </main>
 

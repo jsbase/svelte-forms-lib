@@ -1,0 +1,3 @@
+workspace:80
+
+reverse_proxy localhost:3000
