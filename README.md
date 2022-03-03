@@ -4,29 +4,27 @@
 
 Running forms with svelte and svelte-forms-lib in vite.
 
-## Install global packages
+### Install vite, eslint, stylelint and prettier as global dependencies
 ```
-npm i -g vite eslint stylelint prettier
+npm i -g vite eslint stylelint prettier prettier-eslint prettier-eslint-cli
 ```
 
-## Install project
+### Install project
 ```
 npm i
 ```
 
-## Run dev (local)
-### runs on http://localhost:3000
+### Start development server (http://localhost:3000/)
 ```
 vite --host
 ```
 
-## Run preview (server)
+### Build and start preview server (http://localhost:4173/)
 ```
 vite build && vite preview --host
-// runs on http://localhost:4173
 ```
 
-### Install caddy server (e.g. sudo pacman -Syu caddy) to run server on http://workspace/
+#### Optional: Install caddy (e.g. sudo pacman -Syu caddy or from the [official Homepage](https://caddyserver.com/download)) to open a reverse proxy server (http://workspace/) with  preconfigured [Caddyfile](https://raw.githubusercontent.com/jsbase/svelte-forms-lib/main/Caddyfile)
 ```
 sudo caddy run -config Caddyfile
 ```
