@@ -95,11 +95,14 @@
   <pre>{payload}</pre>
 {/if}
 
-<style>
+<style type="text/css">
   .button-group {
     display: flex;
   }
 
+  .button-group button {
+    width: 50%;
+  }
   button ~ button {
     margin-left: 15px;
   }

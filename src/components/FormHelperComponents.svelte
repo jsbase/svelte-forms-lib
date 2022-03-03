@@ -6,10 +6,10 @@
    */
   import { onMount, onDestroy } from "svelte";
   import { Form, Field, ErrorMessage } from "svelte-forms-lib";
-  import { Users } from "../users.js";
+  import { Users } from "../users";
   import * as yup from "yup";
 
-  $: payload = Users;
+  let payload;
   let unsubscribe;
   let formProps;
 
@@ -21,17 +21,20 @@
 
   const onSubmit = (user) => {
     Users.update((data) => {
-      const users = JSON.parse(data);
+      const users = typeof data !== "object" ? JSON.parse(data) : data;
+
       users.unshift(user);
 
-      data = users;
+      data = JSON.stringify(users);
 
       return data;
     });
   };
 
   onMount(() => {
-    unsubscribe = Users.subscribe((users) => {
+    unsubscribe = Users.subscribe((data) => {
+      const users = typeof data !== "object" ? JSON.parse(data) : data;
+
       payload = users;
 
       formProps = {
@@ -69,7 +72,7 @@
       <Field
         type="radio"
         name="usergender"
-        value="Mr"
+        value="male"
         class="form-checkbox"
         id="usergender-mr"
         checked
@@ -82,7 +85,7 @@
       <Field
         type="radio"
         name="usergender"
-        value="mrs"
+        value="female"
         class="form-checkbox"
         id="usergender-mrs"
       />
@@ -94,7 +97,7 @@
       <Field
         type="radio"
         name="usergender"
-        value="mx"
+        value="diverse"
         class="form-checkbox"
         id="usergender-mx"
       />
@@ -123,26 +126,31 @@
   </Form>
 {/if}
 
-<code>
-  {JSON.stringify(payload)}
-</code>
+<!-- svelte-ignore missing-declaration -->
+{#if payload}
+  <ul>
+    {#each payload as user}
+      <li>
+        <dl>
+          <dt>Name</dt>
+          <dd>{user.username}</dd>
 
-<!--
-<ul>
-  {#each JSON.parse(payload) as userData}
-    <li>
-      {JSON.stringify(userData)}
-      <dl>
-        {#each Array.from(JSON.parse(userData)) as uData, key}
-          <dt>{key}</dt>
-          <dd>{uData}</dd>
-        {/each}
-      </dl>
-    </li>
-  {/each}
-</ul>
--->
-<style>
+          <dt>E-Mail</dt>
+          <dd>
+            <a href="mailto:{user.useremail}">{user.useremail}</a>
+          </dd>
+
+          <dt>Gender</dt>
+          <dd>{user.usergender}</dd>
+        </dl>
+      </li>
+    {/each}
+  </ul>
+{:else}
+  <p>No data.</p>
+{/if}
+
+<style type="text/css">
   input[type="checkbox"]:checked + .form-label .form-label__circle:before,
   input[type="radio"]:checked + .form-label .form-label__circle:before {
     background: var(--primary);
@@ -159,7 +167,7 @@
     border: 4px solid var(--primary);
     height: 18px;
     width: 18px;
-    transition: border-color 0.4s cubic-bezier(0.45, 1.8, 0.5, 0.75);
+    transition: all 0.4s ease-in-out;
   }
   .form-label__circle:before {
     content: "";
@@ -172,15 +180,57 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    transition: background-color 0.4s cubic-bezier(0.45, 1.8, 0.5, 0.75);
+    transition: all 0.4s ease-in-out;
   }
   .form-label__text {
-    font-size: 22px;
-    font-weight: bold;
+    font-size: 18px;
+    font-weight: 600;
     padding-left: 10px;
+    letter-spacing: normal;
   }
-  code {
-    text-align: left;
+  ul {
     display: block;
+    list-style-type: none;
+    list-style-position: outside;
+  }
+  li {
+    margin-top: 1rem;
+  }
+  li:first-of-type {
+    margin-top: 0;
+  }
+  dl {
+    display: flex;
+    flex-flow: row wrap;
+    border: solid var(--primary);
+    border-radius: 5px;
+  }
+  dt {
+    background: var(--primary);
+    color: var(--white);
+    flex-basis: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-weight: 700;
+    padding-right: 10px;
+  }
+  dd {
+    flex-basis: 70%;
+    flex-grow: 1;
+    height: 40px;
+    display: flex;
+    font-weight: 500;
+    align-items: center;
+    justify-items: flex-start;
+    padding-left: 10px;
+    border-bottom: var(--border-width) solid var(--primary);
+  }
+  dt:last-of-type,
+  dd:last-of-type {
+    border-bottom: 0;
+  }
+  button {
+    font-weight: 700;
   }
 </style>

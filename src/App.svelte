@@ -21,7 +21,7 @@
   </div>
 </main>
 
-<style global>
+<style global type="text/css">
   :root {
     --primary-light: #a6f9d6;
     --primary: #5be2a9;
@@ -31,36 +31,20 @@
     --grey: #e6e6ff;
     --grey-dark: #6d7098;
     --red: #ff6b6b;
-    font-family: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif";
+    --border-width: 2px;
+    --font-default: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif";
   }
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-  }
-  main {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0 auto;
-    padding: 1em;
-    text-align: center;
-  }
-  .container {
-    max-width: 440px;
-  }
-  img {
-    display: inline-block;
-    height: 8rem;
-    width: 8rem;
-    margin-top: 20px;
+  :global(body, body *) {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-default);
   }
   :global(button) {
-    color: var(--white);
     background-color: var(--primary);
     border: none;
-    text-transform: uppercase;
+    color: var(--white);
+    cursor: pointer;
     letter-spacing: 1.8px;
     outline: none;
     border-radius: 4px;
@@ -70,8 +54,16 @@
     font-size: 12px;
     padding: 10px 18px;
     width: 100%;
-    transition: all 150ms ease;
-    cursor: pointer;
+    text-transform: uppercase;
+    transition: ease-in-out;
+  }
+  :global(a) {
+    color: var(--secondary);
+    text-decoration: underline;
+  }
+  :global(a:hover, a:focus, a:active) {
+    color: var(--primary-dark);
+    text-decoration: none;
   }
   :global(button:disabled) {
     background-color: var(--grey);
@@ -85,14 +77,13 @@
   :global(.form-field) {
     background-color: var(--white);
     box-sizing: border-box;
-    font-family: monospace;
     padding: 18px;
     width: 100%;
     padding: 12px;
     color: var(--grey-dark);
     border: 1px solid var(--grey);
     border-radius: 4px;
-    transition: all 150ms ease;
+    transition: all 0.4s ease-in-out;
   }
   :global(select.form-field) {
     padding-right: 30px;
@@ -159,14 +150,47 @@
   :global(.form-error) {
     display: block;
     margin-top: 10px;
-    font-family: monospace;
     font-size: 12px;
     color: var(--red);
   }
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+  main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 1em;
+    text-align: center;
+  }
+  .container {
+    width: 100%;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  img {
+    display: inline-block;
+    height: 8rem;
+    width: 8rem;
+    margin-top: 20px;
+  }
   @media (min-width: 580px) {
     img {
-      height: 4rem;
-      width: 4rem;
+      height: 6rem;
+      width: 6rem;
+    }
+  }
+  @media (min-width: 800px) {
+    .container {
+      max-width: 400px;
+    }
+    img {
+      height: 5rem;
+      width: 5rem;
     }
   }
 </style>

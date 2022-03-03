@@ -60,4 +60,4 @@
   <pre>{payload}</pre>
 {/if}
 
-<style></style>
+<style type="text/css"></style>
