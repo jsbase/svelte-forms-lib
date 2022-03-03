@@ -52,7 +52,7 @@
   onDestroy(unsubscribe);
 </script>
 
-<h1>helper components</h1>
+<h1>persitent data</h1>
 
 {#if formProps}
   <Form {...formProps}>
@@ -151,6 +151,9 @@
 {/if}
 
 <style type="text/css">
+  h1 {
+    margin-top: 2rem;
+  }
   input[type="checkbox"]:checked + .form-label .form-label__circle:before,
   input[type="radio"]:checked + .form-label .form-label__circle:before {
     background: var(--primary);

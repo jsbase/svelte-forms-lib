@@ -1,7 +1,7 @@
 <script>
   import logo from "./assets/svelte.png";
   import FormBasic from "./components/FormBasic.svelte";
-  import FormHelperComponents from "./components/FormHelperComponents.svelte";
+  import FormPersitent from "./components/FormPersitent.svelte";
   import FormCustomValidation from "./components/FormCustomValidation.svelte";
   import FormYupValidation from "./components/FormYupValidation.svelte";
   import FormArray from "./components/FormArray.svelte";
@@ -13,11 +13,11 @@
 
 <main>
   <div class="container">
-    <FormHelperComponents />
-    <!-- <FormBasic />
+    <FormBasic />
     <FormCustomValidation />
     <FormYupValidation />
-    <FormArray /> -->
+    <FormArray />
+    <FormPersitent />
   </div>
 </main>
 

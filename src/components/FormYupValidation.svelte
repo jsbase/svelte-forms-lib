@@ -24,7 +24,7 @@
   });
 </script>
 
-<h1>yup validation</h1>
+<h2>yup</h2>
 
 <form on:submit={handleSubmit}>
   <label for="title" class="form-label">title</label>
@@ -77,4 +77,8 @@
   <pre>{payload}</pre>
 {/if}
 
-<style type="text/css"></style>
+<style type="text/css">
+  h2 {
+    margin-top: 4rem;
+  }
+</style>

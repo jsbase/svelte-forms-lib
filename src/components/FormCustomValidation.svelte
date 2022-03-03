@@ -27,7 +27,9 @@
   });
 </script>
 
-<h1>custom validation</h1>
+<h1>validation</h1>
+
+<h2>custom</h2>
 
 <form on:submit={handleSubmit}>
   <div class="form-group">
@@ -58,4 +60,11 @@
   <pre>{payload}</pre>
 {/if}
 
-<style type="text/css"></style>
+<style type="text/css">
+  h1 {
+    margin-top: 5rem;
+  }
+  h2 {
+    margin-top: 2rem;
+  }
+</style>

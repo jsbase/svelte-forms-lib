@@ -43,11 +43,11 @@
 </script>
 
 <form>
-  <h1>add form data</h1>
+  <h1>editable data</h1>
 
   {#each $form.users as user, j}
-    <div class="form-group">
-      <div>
+    <div>
+      <div class="form-group">
         <input
           name={`users[${j}].name`}
           placeholder="name"
@@ -59,9 +59,7 @@
         {#if $errors.users[j].name}
           <small class="form-error">{$errors.users[j].name}</small>
         {/if}
-      </div>
 
-      <div>
         <input
           name={`users[${j}].email`}
           placeholder="email"
@@ -75,13 +73,15 @@
         {/if}
       </div>
 
-      {#if j === $form.users.length - 1}
-        <button type="button" on:click={add}>+</button>
-      {/if}
+      <div class="button-group">
+        {#if j === $form.users.length - 1}
+          <button type="button" on:click={add}>+</button>
+        {/if}
 
-      {#if $form.users.length !== 1}
-        <button type="button" on:click={remove(j)}>-</button>
-      {/if}
+        {#if $form.users.length !== 1}
+          <button type="button" on:click={remove(j)}>-</button>
+        {/if}
+      </div>
     </div>
   {/each}
 
@@ -96,12 +96,15 @@
 {/if}
 
 <style type="text/css">
+  h1 {
+    margin-top: 5rem;
+  }
+  .form-group input {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
   .button-group {
     display: flex;
-  }
-
-  .button-group button {
-    width: 50%;
   }
   button ~ button {
     margin-left: 15px;

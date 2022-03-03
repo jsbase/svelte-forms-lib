@@ -60,4 +60,8 @@
   <pre>{payload}</pre>
 {/if}
 
-<style type="text/css"></style>
+<style type="text/css">
+  h1 {
+    margin-top: 5rem;
+  }
+</style>
