@@ -20,23 +20,20 @@
   });
 
   const onSubmit = (value) => {
-    Store.update(() => {
+    Store.update((values) => {
       // console.log("UPDATE   value: ", value);
-
-      let newPayload = [value, ...payload];
-      //newPayload.concat(oldPayload);
-      //newPayload.push(value);
-      //payload = newPayload;
-      return value;
+      values.unshift(value);
+      //payload = values;
+      return values;
     });
   };
 
   onMount(() => {
-    unsubscribe = Store.subscribe((updatedPayload) => {
+    unsubscribe = Store.subscribe((values) => {
+      // console.log("SUBSCRIBE   values: ", values);
       // console.log("SUBSCRIBE   payload: ", payload);
-      // console.log("SUBSCRIBE   oldPayload: ", updatedPayload);
 
-      payload = updatedPayload;
+      payload = values;
 
       formProps = {
         initialValues: {
