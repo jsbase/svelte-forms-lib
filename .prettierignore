@@ -1,5 +1,10 @@
+/.history/
+/coverage/
+/node_modules/
+**/node_modules/
+**/__sapper__/
+**/cypress/screenshots/
 strings.jsonscripts/*
-node_modules/*
 public/*
 build/*
 dist/*
