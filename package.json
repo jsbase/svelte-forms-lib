@@ -20,7 +20,7 @@
     "prettier-eslint": "^13.0.0",
     "prettier-eslint-cli": "^5.0.1",
     "prettier-stylelint": "^0.4.2",
-    "stylelint": "^14.5.3",
+    "stylelint": "^15.10.1",
     "svelte": "^3.44.0",
     "svelte-forms-lib": "^2.0.1",
     "vite": "^2.8.6",
